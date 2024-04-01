@@ -52,7 +52,7 @@ def dot_in_place(A,b,x):
        if sum_line[s]>b[s]: return False
     return True
 
-def alg_dinkelvach(P,D,A,b):
+def alg_dinkelvach(P,D,A,b,symb):
     def insert_x_in_P(x):
         sum = 0
         for i in range(len(P)-1):
@@ -82,16 +82,26 @@ def alg_dinkelvach(P,D,A,b):
     
     lambda_alg = Fraction()
     count_lambda_iter = 0
-    crit_count_lambda_iter = 1000
+    crit_count_lambda_iter = 2
     while (lambda_alg!=0 and count_lambda_iter<crit_count_lambda_iter) or count_lambda_iter==0:
         lambda_alg = Fraction(insert_x_in_P(dbr),insert_x_in_D(dbr))
         new_C = P-lambda_alg*D
+
         lin_prog = A.tolist()
-        lin_prog.insert(len(A),rev(new_C))
-        lin_prog[len(A)].insert(0,0)
+
+        lin_prog.insert(len(A),rev(new_C[:-1]))
+        lin_prog[len(A)].insert(0,Fraction(0))
         for x in range(len(A)):
             lin_prog[x].insert(0,b[x])
+        if symb =="<=":
+            count_stb = len(lin_prog[0])
+            for l in range(len(lin_prog)):
+                for k in range(len(lin_prog)-1):
+                    lin_prog[l].insert(count_stb+k,Fraction(0))
+            for l in range(count_stb-1,len(lin_prog[0])-1):    
+                lin_prog[count_stb-l][l]=Fraction(1)
 
+        print(lin_prog)
         solved_lin_prog_task = False
         crit_count_lin_prog = 1000
         count_lin_prog = 0
@@ -101,7 +111,8 @@ def alg_dinkelvach(P,D,A,b):
         for copy_dbr in range(len(dbr)):
            dbr[copy_dbr]=lin_prog[0][copy_dbr]
         count_lambda_iter+=1
-    print (dbr)
+        print(count_lambda_iter)
+        print (dbr)
 
 
-alg_dinkelvach(np.array([Fraction(3),Fraction(6),Fraction(8),Fraction(10)]),np.array([Fraction(4),Fraction(5),Fraction(9),Fraction(10)]),np.array([[Fraction(1),Fraction(2),Fraction(3)],[4,5,6]]),np.array([1,2]))
+alg_dinkelvach(np.array([Fraction(5),Fraction(2),Fraction(3)]),np.array([Fraction(3),Fraction(1),Fraction(2)]),np.array([[Fraction(6),Fraction(4)],[Fraction(3),Fraction(5)]]),np.array([Fraction(25),Fraction(20)]),"<=")
