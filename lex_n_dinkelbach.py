@@ -66,7 +66,8 @@ def dot_in_place(A,b,x):
        if sum_line[s]>b[s]: return False
     return True
 
-def alg_dinkelvach(P,D,A,b,symb):
+def alg_dinkelbach(P,D,A,b,symb,save_txt):
+    
     def insert_x_in_P(x):
         sum = 0
         for i in range(len(P)-1):
@@ -141,8 +142,20 @@ def alg_dinkelvach(P,D,A,b,symb):
         print('Num of vec in basis',nums_of_basis)
         print ('Basis solution', dbr)
         print('F = ',F, '\n\n')
+        if save_txt:
+            log = open("log.txt", "a")
+            print('--------------ITERATION ',count_lambda_iter,'------------------',file = log)
+            print(count_lambda_iter,' lambda',lambda_alg,file=log)
+            print('Mission: ',new_C,file=log)
+            print('Task of lin prog',file=log)
+            print('End iteration:',file=log)
+            df = pd.DataFrame(data = lin_prog)
+            print(df,file=log)
+            print('Num of vec in basis',nums_of_basis,file=log)
+            print ('Basis solution', dbr,file=log)
+            print('F = ',F, '\n\n',file=log)
         #time.sleep(5)
     return dbr
 
 
-alg_dinkelvach(np.array([Fraction(5),Fraction(2),Fraction(3)]),np.array([Fraction(3),Fraction(1),Fraction(2)]),np.array([[Fraction(6),Fraction(4)],[Fraction(3),Fraction(5)]]),np.array([Fraction(25),Fraction(20)]),"<=")
+#alg_dinkelvach(np.array([Fraction(5),Fraction(2),Fraction(3)]),np.array([Fraction(3),Fraction(1),Fraction(2)]),np.array([[Fraction(6),Fraction(4)],[Fraction(3),Fraction(5)]]),np.array([Fraction(25),Fraction(20)]),"<=")
