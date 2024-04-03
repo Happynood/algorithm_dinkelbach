@@ -1,22 +1,25 @@
+#все импорты
 import pandas as pd
 from scipy import spatial
 import copy
 import numpy as np
 from fractions import Fraction
 #import time
-
+#Функия для обратной записи массива
 def rev(lst):
     return [ -i for i in lst ] 
-
+#Есть ли в столбце элемент меньше нуля
 def check_stb_more_zero(a,x):
     for i in range(1,len(a)-1):
       if a[i][x]<0: return False
-
     return True
+
+#Красивый вывод симплекс-таблицы
 def beauty_print_simplex_table(a):
    df = pd.DataFrame(data = a)
    print(df)
 
+#Поиск номеров вектров, входящих в базис
 def search_main_basis(a):
    num_of_vectors_which_are_basis = []
    for i in range(1,len(a[0])-1):
@@ -26,13 +29,14 @@ def search_main_basis(a):
        if count_of_zeros==len(a)-2 and len(num_of_vectors_which_are_basis)<len(a)-1: num_of_vectors_which_are_basis.append(i-1)
    return num_of_vectors_which_are_basis
 
-          
+#Итерация лексикографическим симлекс-методом
 def iter_lex(a):
+  #Начинаем поиск элемента, который мы пустим в базис
   max_x = 1
   max_y = 0
   while a[len(a)-1][max_x]>=0:
     max_x+=1
-    if max_x>len(a[0])-1: 
+    if max_x>len(a[0])-1: #Если не найдем, какой выводить - мы нашли оптимальное решение
       #print('Оптимальное решение найдено')
       return a,True
   for x in range(max_x,len(a[0])):
