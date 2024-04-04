@@ -70,8 +70,9 @@ def dot_in_place(A,b,x):
        if sum_line[s]>b[s]: return False
     return True
 
-def alg_dinkelbach(P,D,A,b,symb,save_txt):
-    
+def alg_dinkelbach(P,D,A,b,symb,save_txt,mission):
+    if mission:
+       P=P*(-1)
     def insert_x_in_P(x):
         sum = 0
         for i in range(len(P)-1):
@@ -116,7 +117,7 @@ def alg_dinkelbach(P,D,A,b,symb,save_txt):
         lin_prog[len(A)].insert(0,Fraction(new_C[len(new_C)-1]))
         for x in range(len(A)):
             lin_prog[x].insert(0,b[x])
-        if symb =="<=":
+        if symb =="<":
             count_stb = len(lin_prog[0])
             for l in range(len(lin_prog)):
                 for k in range(len(lin_prog)-1):

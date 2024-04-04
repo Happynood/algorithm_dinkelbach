@@ -32,7 +32,7 @@ class mywindow(QtWidgets.QMainWindow):
                 arr_ogr = []
                 b.append(Fraction(task_arr[i]))
             count+=1
-        solution = alg_dinkelbach(np.array(P),np.array(D),np.array(A),np.array(b),"<=",self.ui.checkBox.isChecked())
+        solution = alg_dinkelbach(np.array(P),np.array(D),np.array(A),np.array(b),self.ui.comboBox.currentText(),self.ui.checkBox.isChecked(),self.ui.checkBox_2.isChecked())
         for i in range(len(solution)):
             a = 'X'+str(i)+' = '+str(solution[i])+' '
             self.ui.textBrowser.append(a)
