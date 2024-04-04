@@ -93,9 +93,10 @@ def alg_dinkelbach(P,D,A,b,symb,save_txt,mission):
             break
         else:
             dbr[add_to_dbr_index]+=1
-            if add_to_dbr_index==len(dbr):
-                add_to_dbr_index=-1
-            add_to_dbr_index+=1
+            if add_to_dbr_index ==len(dbr)-1:
+               add_to_dbr_index = 0
+            else:
+               add_to_dbr_index+=1
 
         count_find_dbr+=1
 
