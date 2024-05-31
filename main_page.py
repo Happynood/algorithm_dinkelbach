@@ -43,12 +43,12 @@ class Ui_Dialog(object):
         self.checkBox_2.setGeometry(QtCore.QRect(20, 110, 171, 20))
         self.checkBox_2.setObjectName("checkBox_2")
         self.comboBox = QtWidgets.QComboBox(Dialog)
-        self.comboBox.setGeometry(QtCore.QRect(20, 135, 16, 16))
+        self.comboBox.setGeometry(QtCore.QRect(20, 135, 35, 16))
         self.comboBox.setObjectName("comboBox")
         self.comboBox.addItem('=')
         self.comboBox.addItem('<')
         self.label_3 = QtWidgets.QLabel(Dialog)
-        self.label_3.setGeometry(QtCore.QRect(42, 135, 121, 16))
+        self.label_3.setGeometry(QtCore.QRect(60, 135, 121, 16))
         self.label_3.setObjectName("label_3")
 
         self.pushButton2 = QtWidgets.QPushButton(Dialog)
@@ -66,7 +66,7 @@ class Ui_Dialog(object):
         self.pushButton.setText(_translate("Dialog", "Решить"))
         self.pushButton2.setText(_translate("Dialog", "Путь txt"))
         self.checkBox.setText(_translate("Dialog", "Сохранить итерации в txt"))
-        self.checkBox_2.setText(_translate("Dialog", "Минимазация функции"))
+        self.checkBox_2.setText(_translate("Dialog", "Минимизация функции"))
         self.label_3.setText(_translate("Dialog", "Знак ограничений"))
 
     
