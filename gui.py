@@ -1,15 +1,15 @@
 import sys
-import time
 import copy
-from PyQt5 import QtWidgets, QtGui
+from PyQt5 import QtWidgets
 from main_page import Ui_Dialog
 from lex_n_dinkelbach import rev,alg_dinkelbach,alg_dinkelbach_with_no_output
-from lex_n_dinkelbach import iter_lex
+from lex_n_dinkelbach import iter_lex,solution_of_lin_prog,create_simplex_table
+
 from fractions import Fraction
 import numpy as np
 
 def double_phaz_sm(A,b):
-    task_of_test = [Fraction(1)]*(len(A[0])+1)
+    task_of_test = [Fraction(0)]*(len(A[0])+1)
     lin_prog =copy.deepcopy(A)
     lin_prog.insert(len(A),rev(task_of_test[:-1]))
     for x in range(len(A)):
@@ -171,6 +171,7 @@ class mywindow(QtWidgets.QMainWindow):
                                symb,False,False,self.path,self.save)
             test2 = alg_dinkelbach_with_no_output(np.array(D), np.array(one_massive), np.array(A), np.array(b),
                                    symb, False, True, self.path, self.save)
+
         except:
             self.ui.textBrowser.append("Некорректные данные!\nНекорректная задача")
             return
@@ -183,22 +184,6 @@ class mywindow(QtWidgets.QMainWindow):
             neg=1
         else:
             neg=-1
-        #test2 = alg_dinkelbach1(np.array(D), np.array(one_massive), np.array(A), np.array(b),
-                               #self.ui.comboBox.currentText(), False, True)
-        #print(test1, test2)
-
-        #def im_sorry(x):
-        #    sum = 0
-        #    for i in range(len(D) - 1):
-        #        sum += D[i] * x[i]
-        #    return sum + D[len(D) - 1]
-        #if im_sorry(test1)>=0>=im_sorry(test2):
-        #    self.ui.textBrowser.append("Некорректные данные!\nЗнаменатель может\nпринять ноль!")
-        #    output_error_log("Некорректные данные!\nЗнаменатель может\nпринять ноль!",self.ui.checkBox.isChecked(),self.path)
-        #    return
-        #if im_sorry(test1) < 0:
-        #    rev(D)
-        #    mission = not mission
         if self.path =='':self.path = '.'
 
         solution = alg_dinkelbach(np.array(P),np.array(D),np.array(A),np.array(b),symb,self.ui.checkBox.isChecked(),self.ui.checkBox_2.isChecked(),self.path,self.save, neg)
